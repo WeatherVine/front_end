@@ -1,0 +1,17 @@
+language: ruby
+rbenv:
+- 2.5.3
+addons:
+  postgresql: 9.6
+before_install:
+- gem install bundler
+- nvm install --lts
+script:
+- bundle exec rails db:{create,migrate} RAILS_ENV=test
+- bundle exec rspec
+deploy:
+  provider: heroku
+  api_key:
+    secure: XBIKP6WsrXJiYbqER1yC9J8fQ0z0lgqJI3a/Xl2aWKwkEDNfYJPPvg11ann7M427jmxcOdKpLl35yHMHvqDoYc7Yd57QUGUYxSHKRYCJRA0zKClUK+/BQcoP788ZQ9uHEGaImmWNwWhmZcMR9QLEVU5NyQ3wBDUl8EqrSfuNR2ACpApFE4njY+zkPGHwgXBfNJaXisBerrnGW8PpmvNpKLqckoAhuP9z1B9rDWKAdsZ8nu8yD2eV2ttRu7RSiyZr8Ck+kPQ4s/rwMzdmyyYZvEXn6wFtA2fXeZYRBbxBCHRy3EuuvopQE2ZrU0ZTigpWfs75i7cYaDiMTkwLHa1i1wWLcaqiteFa7hnFxsMLWRpRGUjGrs7Uc+Ez3GlZUYMaNbXlwQn/IZioICyOnKt/lZdYwMQp1CloIVIgWjPasiYwXNvaSPa3Tkc+dZnciLTEiw/KZ0dEi+eIg+UA9ivz+UX15DbIcNMoVf51y0EJj5FXXdxuy6Tbo7eQLfIlDmHPNjsUVQ/fXHDRtmeDrTCmtERzpu2uqMsWXfubK9pzoP+rEyz5phIBIAT/3cAYL/OLMDpW3gRSAElWcVXFQRG3K3VfiebaVnTxaCPvJZhOc+KEjes5lu89nclU3SeIlq7sXMVDyaCgsOccc6cmYJpmTSuTqUsJJOhe4JqiDTKh14o=
+  app: weathervine-fe
+  run: rails db:migrate

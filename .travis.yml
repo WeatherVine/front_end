@@ -1,17 +1,17 @@
 language: ruby
-cache:
-- bundler
-before_script:
-- bundle exec rails db:create
-- bundle exec rails db:migrate
-- bundle exec rails assets:precompile
+rbenv:
+- 2.5.3
+addons:
+  postgresql: 9.6
+before_install:
+- gem install bundler:2.1.4
+- bundle update mimemagic
+script:
+- bundle exec rails db:{create,migrate} RAILS_ENV=test
+- bundle exec rspec
 deploy:
   provider: heroku
   api_key:
-    secure: KEY
-  app: weathervine-fe
-  on:
-    repo: weathervine/front_end
-env:
-  global:
     secure: bgCWr+KZyPK9rOEO8VNQxEwz/CS984hqR1rCg+V9rxIYqIpkXe8NDzPLvEnqBIFxVs9NTsIUYDNIEcpZBrHxnFF650VM95Fs9hd/0m/T4/OS2Eq7uD+J7LNXVB0I9d8aBx3ZMsKz8bc2J1+TpEMO63+cocdYqFkDwMv/5WqlnWkEEtd6TepaNLYqXFumDX7hkISLYdI9P40KtA43mman8rGUiiOwyF/+FzAmPfU/cRb2BjG6gbzvtVptDbP1BGwOy5tqDcJN0IWRTcx5hw5O/DjkuaLdZnBiKilIyXhubW2j3SwSxtpv9NKZOwjg78lYVGJqDIyaBzFlsZc5FOF/7A6oFERtnfpVTmBq3IU57CvEiP/rBUCZN2VLhejBjoUjcKILcLgMNsuF2ViffUl0W12VzBEGXGI3il/cjb6dTpBH/P7aDGBPQ1kEPnXyvG3Xl1lc56Zu1BAnwYAAmKb16s98kHmXVz+HPw4heLi9af6Ac8kAwy6iej/TybZGBnNC5dBZcp5PUSmYByqpuodfT3/Qe1/z243hGKEcKz/i8949Cd1q64nalHw8hA4/ks3w2tCpHxTuwAdcv2wmSP+9a1fjQUQti2NAN2NhFWkH3HZo6YKBD3mX7yegBN4cWxM4+0GenWOqZvZd9JlFV9F5Mdxnz2wmS05pycP4GjZWGW0=
+  app: weathervine-fe
+  run: rails db:migrate

@@ -13,3 +13,41 @@
  *= require_tree .
  *= require_self
  */
+ @import “bootstrap”;
+  body {
+   background-color: rgb(134, 169, 216);
+   font-family: “courier”, sans-serif;
+ }
+  .nav-bar {
+   background-color: #800040;
+   overflow: hidden;
+ }
+ .nav-bar a {
+   float: left;
+   color: #F2F2F2;
+   text-align: center;
+   padding:14px 16px;
+   text-decoration: none;
+   font-size: 17px;
+ }
+ .nav-bar a:hover {
+   background-color: #ddd;
+   color: black;
+ }
+ .nav-bar a.active {
+   bacground-color: #4CAF50;
+   color: white;
+ }
+ body {
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+ }
+ main {
+   flex: 1;
+ }
+ footer {
+   display: flex;
+   align-self: baseline;
+   flex-direction: row;
+ }

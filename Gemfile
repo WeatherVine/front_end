@@ -15,6 +15,8 @@ gem 'fast_jsonapi'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
+gem 'bootstrap', '~> 4.5.0'
+gem 'jquery-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

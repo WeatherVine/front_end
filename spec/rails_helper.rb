@@ -20,7 +20,7 @@ require 'rspec/rails'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
@@ -67,4 +67,55 @@ Shoulda::Matchers.configure do |config|
     with.test_framework :rspec
     with.library :rails
   end
+end
+
+def stub_omniauth
+  OmniAuth.config.test_mode = true
+  omniauth_google_hash = {
+      provider: 'google_oauth2',
+      uid: '100000000000000000000',
+      info: {
+          name: 'John Doe',
+          email: 'john@example.com',
+          first_name: 'John',
+          last_name: 'Doe',
+          image: 'https://lh4.googleusercontent.com/photo.jpg',
+          urls: {
+              google: 'https://plus.google.com/+JohnDoe'
+          }
+      },
+      credentials: {
+          token: 'MOCK_OMNIAUTH_GOOGLE_TOKEN',
+          refresh_token: 'MOCK_OMNIAUTH_GOOGLE_REFRESH TOKEN',
+          expires_at: DateTime.now,
+          expires: true
+      },
+      extra: {
+          id_token: 'ID_TOKEN',
+          id_info: {
+              azp: 'APP_ID',
+              aud: 'APP_ID',
+              sub: '100000000000000000000',
+              email: 'john@example.com',
+              email_verified: true,
+              at_hash: 'HK6E_P6Dh8Y93mRNtsDB1Q',
+              iss: 'accounts.google.com',
+              iat: 1496117119,
+              exp: 1496120719
+          },
+          raw_info: {
+              sub: '100000000000000000000',
+              name: 'John Doe',
+              given_name: 'John',
+              family_name: 'Doe',
+              profile: 'https://plus.google.com/+JohnDoe',
+              picture: 'https://lh4.googleusercontent.com/photo.jpg?sz=50',
+              email: 'john@example.com',
+              email_verified: 'true',
+              locale: 'en',
+              hd: 'company.com'
+          }
+      }
+  }
+  OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(omniauth_google_hash)
 end

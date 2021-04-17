@@ -1,24 +1,83 @@
-# README
+# Weather Vine Front End Application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## About this Project
+Weather Vine is an educational app for consumers to connect more deeply with the wine they enjoy. Explore wines form a region and see how the climate has influenced the very wine one drinks!   
 
-Things you may want to cover:
+## Table of Contents
 
-* Ruby version
+  - [Getting Started](#getting-started)
+  - [Running the tests](#running-the-tests)
+  - [Database Schema](#database-schema)
+  - [Application Code](#application-code)
+  - [Built With](#built-with)
+  - [Contributing](#contributing)
+  - [Versioning](#versioning)
+  - [Author](#author)
+  - [License](#license)
+  - [Acknowledgments](#acknowledgments)
 
-* System dependencies
+## Getting Started
 
-* Configuration
+To get the web application running, please fork and clone down the repo.
+`git clone <your@github.account:WeatherVine/front_end.git>`
 
-* Database creation
+### Prerequisites
 
-* Database initialization
+To run this application you will need Ruby 2.5.3 and Rails 5.2.5
 
-* How to run the test suite
+### Installing
 
-* Services (job queues, cache servers, search engines, etc.)
+- Install the gem packages  
+`bundle install`
 
-* Deployment instructions
+- Create the database by running the following command in your terminal
+`rails db{:drop, :create, :migrate}`
 
-* ...
+## Running the tests
+RSpec testing suite is utilized for testing this application.
+- Run the RSpec suite to ensure everything is passing as expected  
+`bundle exec rspec`
+
+## Oauth via Google
+
+
+## Database Schema
+The schema represents the relationships between the models in the  front end database. The schema includes the following tables:
+  - Users
+
+## Endpoints
+
+## Built With
+- Ruby
+- Rails
+- RSpec
+- FactoryBot
+- Faker
+
+
+## Versioning
+- Ruby 2.5.3
+- Rails 5.2.5
+
+## Authors
+- **Adam Bowers**
+| [GitHub](https://github.com/Pragmaticpraxis37) |
+  [LinkedIn](https://www.linkedin.com/in/adam-bowers-06a871209/)
+- **Alex Schwartz**
+| [GitHub](https://github.com/aschwartz1) |
+  [LinkedIn](https://www.linkedin.com/in/alex-s-77659758/)
+- **Diana Buffone**
+| [GitHub](https://github.com/Diana20920) |
+  [LinkedIn](https://www.linkedin.com/in/dianabuffone/)
+- **Katy La Tour**
+| [GitHub](https://github.com/klatour324) |
+  [LinkedIn](https://www.linkedin.com/in/klatour324/)
+- **Tommy Nieuwenhuis**
+|  [GitHub](https://github.com/tsnieuwen) |
+    [LinkedIn](https://www.linkedin.com/in/thomasnieuwenhuis/)
+- **Trevor Suter**
+|    [GitHub](https://github.com/trevorsuter) |
+    [LinkedIn](https://www.linkedin.com/in/trevor-suter-216207203/)
+- **Wil McCauley**
+|    [GitHub](https://github.com/wil-mcc) |
+    [LinkedIn](https://www.linkedin.com/in/wil-mccauley/)

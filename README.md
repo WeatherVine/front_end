@@ -1,7 +1,7 @@
 # Weather Vine Front End Application
 
 ## About this Project
-Weather Vine is an educational app for consumers to connect more deeply with the wine they enjoy. Explore wines form a region and see how the climate has influenced the very wine one drinks!   
+Weather Vine is an educational app for consumers to connect more deeply with the wine they enjoy. Explore wines from a region and see how the climate has influenced the very wine one drinks!   
 
 ## Table of Contents
 
@@ -12,7 +12,7 @@ Weather Vine is an educational app for consumers to connect more deeply with the
   - [Built With](#built-with)
   - [Contributing](#contributing)
   - [Versioning](#versioning)
-  - [Author](#author)
+  - [Authors](#authors)
   - [License](#license)
   - [Acknowledgments](#acknowledgments)
 
@@ -42,7 +42,7 @@ RSpec testing suite is utilized for testing this application.
 
 
 ## Database Schema
-The schema represents the relationships between the models in the  front end database. The schema includes the following tables:
+The schema represents the relationships between the models in the front end database. The schema includes the following tables:
   - Users
 
 ## Endpoints

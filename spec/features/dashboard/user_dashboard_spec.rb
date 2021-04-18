@@ -15,7 +15,7 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
         it 'has a button to discover wines, a button to logout, and a section for my favorite wines' do
           within(".nav-bar") do
             expect(page).to have_button("Discover Wines")
-            # expect(page).to have_button("Logout")
+            expect(page).to have_button("Logout")
           end
           # expect(page).to have_content("My Favorite Wines")
 

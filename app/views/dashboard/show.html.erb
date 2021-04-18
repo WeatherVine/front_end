@@ -1,5 +1,6 @@
 <section class="nav-bar">
   <%= button_to "Discover Wines", discover_index_path, method: :get %>
+  <%= button_to "Logout", logout_path, method: :get %>
 </section>
 
 <h1>Welcome, <%= current_user.username %></h1>

@@ -7,4 +7,8 @@ Rails.application.routes.draw do
 
   #discover
   resources :discover, only: [:index]
+
+  #logout
+  get '/logout', to: 'sessions#destroy'
+  delete '/logout', to: 'sessions#destroy'
 end

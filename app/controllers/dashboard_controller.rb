@@ -1,8 +1,9 @@
 class DashboardController < ApplicationController
-  # before_action :find_wines, only: [:show]
+  before_action :current_user, only: [:show]
 
   def show
-    #@wines = FindWineService.wines
+    @wines = FindWineService.wines
+    require "pry"; binding.pry
   end
 
   # private

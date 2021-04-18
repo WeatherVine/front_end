@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'webmock/rspec'
 
 RSpec.describe 'User Dashboard Spec', type: :feature do
   describe 'happy path' do
@@ -10,17 +11,21 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
       click_button 'Register/Login with Google', match: :first
     end
 
-      describe 'as a user, when I vist my user dashboard' do
+    describe 'as a user, when I vist my user dashboard' do
 
-        it 'has a button to discover wines, a button to logout, and a section for my favorite wines' do
-          within(".nav-bar") do
-            expect(page).to have_button("Discover Wines")
-            expect(page).to have_button("Logout")
-          end
-          expect(page).to have_content("My Favorite Wines")
-
+      it 'has a button to discover wines, a button to logout' do
+        within(".nav-bar") do
+          expect(page).to have_button("Discover Wines")
+          expect(page).to have_button("Logout")
         end
       end
+
+      it 'has a section for favorite wines' do
+        stub_request(:get, "https://weathervine-be.herokuapp.com/api/v1/users/#{current_user.id}/dashboard").
+        to_return(status: 200, body: '{"data": [{"id": "1", "type": "favorite-wine", "attributes": {"api_id": "123", "name": "Duckborn Merlot", "comment": "those tanins tho"}}]}')
+        expect(page).to have_content("Duckborn Merlot")
+      end
+    end
   end
 end
 

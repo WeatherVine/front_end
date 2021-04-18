@@ -349,6 +349,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   factory_bot_rails
   faker
+  faraday
   fast_jsonapi
   figaro
   jbuilder (~> 2.5)

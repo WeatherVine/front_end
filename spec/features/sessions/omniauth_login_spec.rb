@@ -17,7 +17,7 @@ RSpec.describe 'Login Sessions Spec', type: :feature do
       user_count = User.count
       expect(user_count).to eq(1)
       user = User.first
-
+      require "pry"; binding.pry
       expect(page).to have_content("Welcome, #{user.username}")
     end
 

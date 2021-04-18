@@ -9,10 +9,6 @@ RSpec.describe 'Welcome Page', type: :feature do
       expect(page).to have_css('.app-info')
       within('.app-info') do
         expect(page).to have_content("Learn all about Weather Vine here")
-      end
-
-      expect(page).to have_css(".nav-bar")
-      within('.nav-bar') do
         expect(page).to have_button("Register/Login with Google")
       end
     end

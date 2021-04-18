@@ -15,8 +15,10 @@
  */
  @import "bootstrap";
   body {
-   background-color: rgb(134, 169, 216);
    font-family: “courier”, sans-serif;
+   background-image: url("https://images.unsplash.com/photo-1566996694954-90b052c413c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80");
+   background-size: cover;
+   background-repeat: no-repeat;
  }
   .nav-bar {
    background-color: #800040;
@@ -51,3 +53,7 @@
    align-self: baseline;
    flex-direction: row;
  }
+
+ .blue_glow { color: purple;
+  text-shadow: 1px 1px 2px cyan, 0 0 10px white, 0 0 5px white;
+}

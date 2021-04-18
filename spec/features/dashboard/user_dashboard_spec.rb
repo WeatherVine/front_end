@@ -17,7 +17,7 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
             expect(page).to have_button("Discover Wines")
             expect(page).to have_button("Logout")
           end
-          # expect(page).to have_content("My Favorite Wines")
+          expect(page).to have_content("My Favorite Wines")
 
         end
       end

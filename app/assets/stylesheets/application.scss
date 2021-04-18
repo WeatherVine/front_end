@@ -1,0 +1,59 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ @import "bootstrap";
+  body {
+   font-family: “courier”, sans-serif;
+   background-image: url("https://images.unsplash.com/photo-1566996694954-90b052c413c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80");
+   background-size: cover;
+   background-repeat: no-repeat;
+ }
+  .nav-bar {
+   background-color: #800040;
+   overflow: hidden;
+ }
+ .nav-bar a {
+   float: left;
+   color: #F2F2F2;
+   text-align: center;
+   padding:14px 16px;
+   text-decoration: none;
+   font-size: 17px;
+ }
+ .nav-bar a:hover {
+   background-color: #ddd;
+   color: black;
+ }
+ .nav-bar a.active {
+   bacground-color: #4CAF50;
+   color: white;
+ }
+ body {
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+ }
+ main {
+   flex: 1;
+ }
+ footer {
+   display: flex;
+   align-self: baseline;
+   flex-direction: row;
+ }
+
+ .blue_glow { color: purple;
+  text-shadow: 1px 1px 2px cyan, 0 0 10px white, 0 0 5px white;
+}

@@ -12,7 +12,7 @@ RSpec.describe 'Login Sessions Spec', type: :feature do
 
       visit "/"
 
-      click_button 'Login'
+      click_button 'Register/Login with Google', match: :first
 
       user_count = User.count
       expect(user_count).to eq(1)

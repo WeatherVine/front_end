@@ -1,9 +1,9 @@
 class DashboardController < ApplicationController
+  before_action :authorized, only: [:show]
   before_action :current_user, only: [:show]
 
   def show
-    @wines = FindWineService.wines
-    require "pry"; binding.pry
+    @wines = FindWineService.wines(@current_user.id)
   end
 
   # private

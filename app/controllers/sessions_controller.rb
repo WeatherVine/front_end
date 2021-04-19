@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
   def create
     user = User.create_from_omniauth(auth)
-    require "pry"; binding.pry
     session[:user_id] = user.id
     redirect_to user_dashboard_path
   end

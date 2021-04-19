@@ -1,5 +1,5 @@
 require 'simplecov'
-require 'webmock'
+require 'webmock/rspec'
 
 SimpleCov.start 'rails'
 SimpleCov.add_filter ['spec', 'config', 'app/channels', 'app/jobs', 'app/mailers']

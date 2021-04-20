@@ -1,0 +1,17 @@
+<section class="nav-bar">
+  <%= button_to "Discover Wines", discover_index_path, method: :get %>
+  <%= button_to "Logout", logout_path, method: :get %>
+</section>
+
+<h3><%= @wine.name %> <%= @wine.vintage %>, <%= @wine.area %></h3>
+
+<h4> Climate Data Summary For Growing Season</h4>
+<li> Average Temp (F): <%= @wine.temp %> degrees </li>
+<li> Total Precipitation: <%= @wine.precip %> inches</li>
+
+<h4> Tasting Notes </h4>
+<li> Eye: <%= @wine.eye %></li>
+<li> Nose: <%= @wine.nose %></li>
+<li> Mouth: <%= @wine.mouth %></li>
+<li> Finish: <%= @wine.finish %></li>
+<li> Overall: <%= @wine.overall %></li>

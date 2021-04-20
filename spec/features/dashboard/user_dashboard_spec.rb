@@ -34,12 +34,6 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
       end
 
       it "displays the user's favorite wine, and a comment on the wine" do
-        # expect(page).to have_content("Duckborn Merlot")
-        # expect(page).to have_content("Barefoot Cabernet Sauvignon")
-        # expect(page).to have_content("Yellow Tail Pinot Noir")
-        # expect(page).to have_content("Totes the best.")
-        # expect(page).to have_content("It’s a'ight.")
-        # expect(page).to have_content("OMG")
         expect(page).to have_content("My Favorite Wines")
         expect(page).to have_link("Duckhorn Merlot")
         expect(page).to have_link("Barefoot Cabernet Sauvignon")
@@ -47,6 +41,11 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
         expect("Duckhorn Merlot").to appear_before("Totes the best.")
         expect("Barefoot Cabernet Sauvignon").to appear_before("It’s a'ight.")
         expect("Yellow Tail Pinot Noir").to appear_before("OMG")
+      end
+
+      it 'clicking on the wine link takes you to the wine show page' do
+        click_link("Barefoot Cabernet Sauvignon")
+        expect(page).to have_current_path("/wines/2345")
       end
 
       it "it has a button to delete the favorite user wine" do

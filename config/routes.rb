@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   #wines
-  get '/wine/:id', to: 'wine#show'
+  get '/wines/:id', to: 'wines#show'
 
   #user wines
   resources :user_wines, only: [:create, :destroy]

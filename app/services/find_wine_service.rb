@@ -2,9 +2,24 @@ class FindWineService
 
   def self.wines(user_id)
     response = Faraday.get("https://weathervine-be.herokuapp.com/api/v1/users/#{user_id}/dashboard")
-    body = JSON.parse(response.body, symbolize_names: true)
-    wines = body[:data][0..2].map do |wine_info|
-      Wine.new(wine_info[:attributes])
+    if response.body == ""
+      nil
+    else
+      body = JSON.parse(response.body, symbolize_names: true)
+      self.format_wines(body)
+    end
+  end
+
+  private
+
+  def self.format_wines(body)
+    body[:data].map do |wine_data|
+      attributes = wine_data[:attributes]
+      OpenStruct.new({
+                      api_id: attributes[:api_id],
+                      name: attributes[:name],
+                      comment: attributes[:comment]
+        })
     end
   end
 

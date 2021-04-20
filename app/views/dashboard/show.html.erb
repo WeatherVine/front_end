@@ -4,3 +4,13 @@
 </section>
 
 <h1>Welcome, <%= current_user.username %></h1>
+
+<h3> My Favorite Wines</h3>
+<% if @wines %>
+  <% @wines.each do |show_wine| %>
+  <%= link_to "#{show_wine.name}", "/wine/#{show_wine.api_id}", method: :get %><br>
+  <%= show_wine.comment %><br>
+  <% end %>
+<% else %>
+  <%= "You don't have any favorite wines yet!" %>
+<% end  %>

@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
   before_action :current_user, only: [:show]
 
   def show
-    @wines = FindWineService.wines(@current_user.id)
+    @wines = FindWineService.wines(current_user.id)
   end
 
   # private

@@ -11,4 +11,7 @@ Rails.application.routes.draw do
   #logout
   get '/logout', to: 'sessions#destroy'
   delete '/logout', to: 'sessions#destroy'
+
+  #wines
+  get '/wine/:id', to: 'wine#show'
 end

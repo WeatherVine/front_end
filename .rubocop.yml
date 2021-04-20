@@ -32,3 +32,9 @@ Metrics/AbcSize:
 
 Rails/UniqueValidationWithoutIndex:
   Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Layout/FirstHashElementIndentation:
+  Enabled: false

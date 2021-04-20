@@ -95,6 +95,8 @@ Set up middleware: Middle ware is a link that says sign in with Google so that w
 ## Service Oriented Architecture
 The following is a depiction of the overall service oriented architecture for this application which includes a Rails Front End application, a Rails Engine on the Back End, and two microservices that call out to a World Weather Online's api and Quini Wine's api:
 
+ ![service_oriented_architecture](https://user-images.githubusercontent.com/23460878/115339977-77e4fb80-a16b-11eb-8653-cf989f600b57.png)
+
 ## Endpoints
 
 ## Built With

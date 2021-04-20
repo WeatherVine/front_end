@@ -32,6 +32,16 @@ RSpec.describe 'Wine Show Page Spec', type: :feature do
             }).
           to_return(status: 200, body: "#{wines_json_response}", headers: {})
 
+        stub_request(:post, "https://weathervine-be.herokuapp.com/api/v1/user/#{user.id}/wines?comment=&name=Duckhorn%20Sauvignon%20Blanc&user_id=#{user.id}&wine_id=546e64cf4c6458020000000d").
+          with(
+          headers: {
+            'Accept'=>'*/*',
+            'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+            'Content-Length'=>'0',
+            'User-Agent'=>'Faraday v1.3.0'
+            }).
+            to_return(status: 200, body: "", headers: {})
+
       visit "/wines/546e64cf4c6458020000000d"
     end
 
@@ -47,11 +57,11 @@ RSpec.describe 'Wine Show Page Spec', type: :feature do
       expect(page).to have_content("75")
       expect(page).to have_content("100")
       expect(page).to have_button("Add Wine to Favorite List")
-      save_and_open_page
     end
 
     it "adds wine to favorite list" do
       click_button("Add Wine to Favorite List")
+      expect(page).to have_current_path(user_dashboard_path)
     end
   end
 end

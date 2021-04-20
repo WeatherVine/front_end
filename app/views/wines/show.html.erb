@@ -24,6 +24,7 @@
     <%= f.label(:comment, "Add a comment on this wine:") %><br>
     <%= f.text_area(:comment) %>
     <%= f.hidden_field :api_id, value: "#{@wine.api_id}" %><br>
+    <%= f.hidden_field :name, value: "#{@wine.name}" %><br>
     <%= f.submit("Add Wine to Favorite List") %>
   <% end  %>
 <% end  %>

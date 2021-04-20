@@ -10,6 +10,17 @@ class FindWineService
     end
   end
 
+  def self.wine_api_ids(user_id)
+    wines = self.wines(user_id)
+    if wines
+      wines.map do |wine|
+        wine.api_id
+      end
+    else
+      []
+    end
+  end
+
   private
 
   def self.format_wines(body)

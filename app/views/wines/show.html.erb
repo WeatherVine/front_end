@@ -1,5 +1,6 @@
 <section class="nav-bar">
   <%= button_to "Discover Wines", discover_index_path, method: :get %>
+  <%= button_to "My Dashboard", user_dashboard_path, method: :get %>
   <%= button_to "Logout", logout_path, method: :get %>
 </section>
 
@@ -10,8 +11,19 @@
 <li> Total Precipitation: <%= @wine.precip %> inches</li>
 
 <h4> Tasting Notes </h4>
-<li> Eye: <%= @wine.eye %></li>
-<li> Nose: <%= @wine.nose %></li>
-<li> Mouth: <%= @wine.mouth %></li>
-<li> Finish: <%= @wine.finish %></li>
-<li> Overall: <%= @wine.overall %></li>
+<li> Eye: <%= (@wine.eye).capitalize %></li>
+<li> Nose: <%= (@wine.nose).capitalize %></li>
+<li> Mouth: <%= (@wine.mouth).capitalize %></li>
+<li> Finish: <%= (@wine.finish).capitalize %></li>
+<li> Overall: <%= (@wine.overall).capitalize %></li><br>
+
+<% if @wines_api_ids.include?(@wine.api_id) %>
+  <%= "This is one of your favorite wines!" %>
+<% else %>
+  <%= form_with url: user_wines_path, method: :post, local: true do |f| %>
+    <%= f.label(:comment, "Add a comment on this wine:") %><br>
+    <%= f.text_area(:comment) %>
+    <%= f.hidden_field :api_id, value: "#{@wine.api_id}" %><br>
+    <%= f.submit("Add Wine to Favorite List") %>
+  <% end  %>
+<% end  %>

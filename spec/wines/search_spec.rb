@@ -15,13 +15,14 @@ RSpec.describe 'Search Results Page', type: :feature do
       it 'shows search results' do
         stub_search_request
         visit wines_search_path(location: 'napa', vintage: '2018')
+        save_and_open_page
 
         within('#search-results') do
           result_cards = page.all('.card')
 
           expect(result_cards.length).to eq(2)
           first = result_cards.first
-          second = result_cards.second
+          second = result_cards.last
 
           within(first) do
             expect(page).to have_content('Duckhorn The Discussion Red 2012')

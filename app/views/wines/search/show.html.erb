@@ -1,0 +1,25 @@
+<div class="container">
+  <h1 class="page-header">Search Results</h1>
+</div>
+
+<div class="container", id="search-info">
+  <p>Search results for:</p>
+  <ul>
+    <li>Location: <%= @info.search_params[:location] %></li>
+    <li>Vintage: <%= @info.search_params[:vintage] %></li>
+  </ul>
+</div>
+
+<div class="container", id="search-results">
+  <% @info.search_results.each do |wine| %>
+    <div class="card">
+      <div class="card-header">
+        <%= link_to wine.name, "/wines/#{wine[:api_id]}" %>
+      </div>
+      <div class="card-body">
+        <p><span class="font-weight-bold">Location:</span> <%= wine.location %></p>
+        <p><span class="font-weight-bold">Vintage:</span> <%= wine.vintage %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

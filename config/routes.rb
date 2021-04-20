@@ -14,4 +14,7 @@ Rails.application.routes.draw do
 
   #wines
   get '/wine/:id', to: 'wine#show'
+
+  #user wines
+  resources :user_wines, only: [:create, :destroy]
 end

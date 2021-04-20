@@ -10,6 +10,7 @@
   <% @wines.each do |show_wine| %>
   <%= link_to "#{show_wine.name}", "/wine/#{show_wine.api_id}", method: :get %><br>
   <%= show_wine.comment %><br>
+  <%= button_to "Unfavorite #{show_wine.name}", user_wine_path(show_wine.api_id), method: :delete %>
   <% end %>
 <% else %>
   <%= "You don't have any favorite wines yet!" %>

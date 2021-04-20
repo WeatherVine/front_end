@@ -48,8 +48,51 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
         expect("Barefoot Cabernet Sauvignon").to appear_before("It’s a'ight.")
         expect("Yellow Tail Pinot Noir").to appear_before("OMG")
       end
+
+      it "it has a button to delete the favorite user wine" do
+        expect(page).to have_button('Unfavorite Duckhorn Merlot')
+        expect(page).to have_button('Unfavorite Barefoot Cabernet Sauvignon')
+        expect(page).to have_button('Unfavorite Yellow Tail Pinot Noir')
+      end
+
+      it "removes a wine from the favorite wines list when a user clicks the `unfavorite button`" do
+        stub_omniauth
+
+        user2 = create(:user, provider: "dog")
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user2)
+        # json_response2 = File.read('spec/fixtures/user_wines_after_delete.json')
+        stub_request(:delete, "https://weathervine-be.herokuapp.com/api/v1/user/#{user2.id}/wines/3456").
+          with(
+            headers: {
+           'Accept'=>'*/*',
+           'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+           'User-Agent'=>'Faraday v1.3.0'
+            }).
+          to_return(status: 200, body: "", headers: {})
+
+        json_response2 = File.read('spec/fixtures/user_wines_after_delete.json')
+
+        stub_request(:get, "https://weathervine-be.herokuapp.com/api/v1/users/#{user2.id}/dashboard").
+          with(
+            headers: {
+           'Accept'=>'*/*',
+           'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+           'User-Agent'=>'Faraday v1.3.0'
+            }).
+          to_return(status: 200, body: "#{json_response2}", headers: {})
+
+        click_button("Unfavorite Yellow Tail Pinot Noir")
+        save_and_open_page
+        expect(page).to have_current_path(user_dashboard_path)
+        expect(page).to have_link("Duckhorn Merlot")
+        expect(page).to have_link("Barefoot Cabernet Sauvignon")
+        expect(page).to_not have_link("Yellow Tail Pinot Noir")
+
+      end
     end
   end
+
+
 
   describe 'sad path' do
     before :each do
@@ -83,7 +126,6 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
       end
 
       it "alerts user if they do not have any favorite wines" do
-        save_and_open_page
         expect(page).to have_content("You don't have any favorite wines yet!")
       end
     end

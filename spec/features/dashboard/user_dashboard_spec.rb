@@ -44,8 +44,21 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
       end
 
       it 'clicking on the wine link takes you to the wine show page' do
+
+        json_response_3 = File.read('spec/fixtures/wine_show.json')
+
+        stub_request(:get, "https://weathervine-be.herokuapp.com/api/v1/wines/2345").
+        with(
+          headers: {
+         'Accept'=>'*/*',
+         'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+         'User-Agent'=>'Faraday v1.3.0'
+          }).
+        to_return(status: 200, body: "#{json_response_3}", headers: {})
+
         click_link("Barefoot Cabernet Sauvignon")
-        expect(page).to have_current_path("/wines/2345")
+        expect(current_path).to eq(wine_path(2345))
+        # "/wines/2345")
       end
 
       it "it has a button to delete the favorite user wine" do

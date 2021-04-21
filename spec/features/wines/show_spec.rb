@@ -6,8 +6,6 @@ RSpec.describe 'Wine Show Page Spec', type: :feature do
     before :each do
       stub_omniauth
 
-      # "https://weathervine-be.herokuapp.com/api/v1/wines/:api_id"
-
       @user = create(:user)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 

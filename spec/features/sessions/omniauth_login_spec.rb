@@ -34,6 +34,12 @@ RSpec.describe 'Login Sessions Spec', type: :feature do
       expect(page).to have_content("Welcome, #{user.username}")
     end
 
+    it 'can log a user out' do
+      stub_omniauth
+
+      
+    end
+
     # it 'logs a returning user in via google mock' do
     #   stub_omniauth
     #   user = create(:omniauth_mock_user)

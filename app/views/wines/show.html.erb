@@ -4,27 +4,27 @@
   <%= button_to "Logout", logout_path, method: :get %>
 </section>
 
-<h3><%= @wine.name %> <%= @wine.vintage %>, <%= @wine.area %></h3>
+<h3><%= @wine[0].name %> <%= @wine[0].vintage %>, <%= @wine[0].area %></h3>
 
 <h4> Climate Data Summary For Growing Season</h4>
-<li> Average Temp (F): <%= @wine.temp %> degrees </li>
-<li> Total Precipitation: <%= @wine.precip %> inches</li>
+<li> Average Temp (F): <%= @wine[0].temp %> degrees </li>
+<li> Total Precipitation: <%= @wine[0].precip %> inches</li>
 
 <h4> Tasting Notes </h4>
-<li> Eye: <%= (@wine.eye).capitalize %></li>
-<li> Nose: <%= (@wine.nose).capitalize %></li>
-<li> Mouth: <%= (@wine.mouth).capitalize %></li>
-<li> Finish: <%= (@wine.finish).capitalize %></li>
-<li> Overall: <%= (@wine.overall).capitalize %></li><br>
+<li> Eye: <%= (@wine[0].eye).capitalize %></li>
+<li> Nose: <%= (@wine[0].nose).capitalize %></li>
+<li> Mouth: <%= (@wine[0].mouth).capitalize %></li>
+<li> Finish: <%= (@wine[0].finish).capitalize %></li>
+<li> Overall: <%= (@wine[0].overall).capitalize %></li><br>
 
-<% if @wines_api_ids.include?(@wine.api_id) %>
+<% if @wine[1].include?(@wine[0].api_id) %>
   <%= "This is one of your favorite wines!" %>
 <% else %>
   <%= form_with url: user_wines_path, method: :post, local: true do |f| %>
     <%= f.label(:comment, "Add a comment on this wine:") %><br>
     <%= f.text_area(:comment) %>
-    <%= f.hidden_field :api_id, value: "#{@wine.api_id}" %><br>
-    <%= f.hidden_field :name, value: "#{@wine.name}" %><br>
+    <%= f.hidden_field :api_id, value: "#{@wine[0].api_id}" %><br>
+    <%= f.hidden_field :name, value: "#{@wine[0].name}" %><br>
     <%= f.submit("Add Wine to Favorite List") %>
   <% end  %>
 <% end  %>

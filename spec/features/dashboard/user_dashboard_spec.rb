@@ -73,7 +73,7 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
         user2 = create(:user, provider: "dog")
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user2)
         # json_response2 = File.read('spec/fixtures/user_wines_after_delete.json')
-        stub_request(:delete, "https://weathervine-be.herokuapp.com/api/v1/user/#{user2.id}/wines/3456").
+        stub_request(:delete, "https://weathervine-be.herokuapp.com/api/v1/user/#{user2.id}/wines/3456?user_id=#{user2.id}&wine_id=3456").
           with(
             headers: {
            'Accept'=>'*/*',
@@ -109,12 +109,12 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
     before :each do
       stub_omniauth
 
-      user = create(:user)
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      @user = create(:user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
       json_response = File.read('spec/fixtures/users_wines.json')
 
-      stub_request(:get, "https://weathervine-be.herokuapp.com/api/v1/users/#{user.id}/dashboard").
+      stub_request(:get, "https://weathervine-be.herokuapp.com/api/v1/users/#{@user.id}/dashboard").
         with(
           headers: {
          'Accept'=>'*/*',
@@ -139,6 +139,43 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
       it "alerts user if they do not have any favorite wines" do
         expect(page).to have_content("You don't have any favorite wines yet!")
       end
+    end
+  end
+
+  describe "delete user wine sad path" do
+    it "alerts the user if a status other than 200 is returned with trying to remove a favorite wine" do
+      stub_omniauth
+      @user = create(:user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
+      json_response = File.read('spec/fixtures/users_wines.json')
+
+      stub_request(:get, "https://weathervine-be.herokuapp.com/api/v1/users/#{@user.id}/dashboard").
+        with(
+          headers: {
+         'Accept'=>'*/*',
+         'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+         'User-Agent'=>'Faraday v1.3.0'
+          }).
+        to_return(status: 200, body: "#{json_response}", headers: {})
+
+      stub_request(:delete, "https://weathervine-be.herokuapp.com/api/v1/user/#{@user.id}/wines/3456?user_id=#{@user.id}&wine_id=3456").
+        with(
+          headers: {
+         'Accept'=>'*/*',
+         'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+         'User-Agent'=>'Faraday v1.3.0'
+          }).
+        to_return(status: 500, body: "", headers: {})
+
+        visit user_dashboard_path
+        expect(page).to have_current_path(user_dashboard_path)
+        save_and_open_page
+        click_button("Unfavorite Yellow Tail Pinot Noir")
+        expect(page).to have_link("Duckhorn Merlot")
+        expect(page).to have_link("Barefoot Cabernet Sauvignon")
+        expect(page).to have_link("Yellow Tail Pinot Noir")
+        expect(page).to have_content("We're sorry, there was an issue with your request")
     end
   end
 end

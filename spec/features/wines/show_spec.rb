@@ -6,7 +6,7 @@ RSpec.describe 'Wine Show Page Spec', type: :feature do
     before :each do
       stub_omniauth
 
-      "https://weathervine-be.herokuapp.com/api/v1/wines/:api_id"
+      # "https://weathervine-be.herokuapp.com/api/v1/wines/:api_id"
 
       @user = create(:user)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
@@ -23,24 +23,24 @@ RSpec.describe 'Wine Show Page Spec', type: :feature do
           }).
         to_return(status: 200, body: "#{single_wine_json_response}", headers: {})
 
-        stub_request(:get, "https://weathervine-be.herokuapp.com/api/v1/users/#{@user.id}/dashboard").
-          with(
-            headers: {
-           'Accept'=>'*/*',
-           'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-           'User-Agent'=>'Faraday v1.3.0'
-            }).
-          to_return(status: 200, body: "#{wines_json_response}", headers: {})
-
-        stub_request(:post, "https://weathervine-be.herokuapp.com/api/v1/user/#{@user.id}/wines?comment=&name=Duckhorn%20Sauvignon%20Blanc&user_id=#{@user.id}&wine_id=546e64cf4c6458020000000d").
-          with(
+      stub_request(:get, "https://weathervine-be.herokuapp.com/api/v1/users/#{@user.id}/dashboard").
+        with(
           headers: {
-            'Accept'=>'*/*',
-            'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-            'Content-Length'=>'0',
-            'User-Agent'=>'Faraday v1.3.0'
-            }).
-            to_return(status: 200, body: "", headers: {})
+         'Accept'=>'*/*',
+         'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+         'User-Agent'=>'Faraday v1.3.0'
+          }).
+        to_return(status: 200, body: "#{wines_json_response}", headers: {})
+
+      stub_request(:post, "https://weathervine-be.herokuapp.com/api/v1/user/#{@user.id}/wines?comment=&name=Duckhorn%20Sauvignon%20Blanc&user_id=#{@user.id}&wine_id=546e64cf4c6458020000000d").
+        with(
+        headers: {
+          'Accept'=>'*/*',
+          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Content-Length'=>'0',
+          'User-Agent'=>'Faraday v1.3.0'
+          }).
+          to_return(status: 200, body: "", headers: {})
 
       visit "/wines/546e64cf4c6458020000000d"
     end
@@ -82,6 +82,50 @@ RSpec.describe 'Wine Show Page Spec', type: :feature do
       expect("Barefoot Cabernet Sauvignon").to appear_before("It’s a'ight.")
       expect("Yellow Tail Pinot Noir").to appear_before("OMG")
       expect("Duckhorn Sauvignon Blanc").to appear_before("Rose all day")
+    end
+  end
+
+  describe 'sad path' do
+    it "gives a flash error if response is a 500" do
+
+      @user = create(:user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
+      single_wine_json_response = File.read('spec/fixtures/wine_show.json')
+
+      stub_request(:get, "https://weathervine-be.herokuapp.com/api/v1/wines/546e64cf4c6458020000000d").
+        with(
+          headers: {
+         'Accept'=>'*/*',
+         'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+         'User-Agent'=>'Faraday v1.3.0'
+          }).
+        to_return(status: 200, body: "#{single_wine_json_response}", headers: {})
+
+      stub_request(:get, "https://weathervine-be.herokuapp.com/api/v1/users/#{@user.id}/dashboard").
+         with(
+           headers: {
+       	  'Accept'=>'*/*',
+       	  'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+       	  'User-Agent'=>'Faraday v1.3.0'
+           }).
+         to_return(status: 200, body: "", headers: {})
+
+      stub_request(:post, "https://weathervine-be.herokuapp.com/api/v1/user/#{@user.id}/wines?comment=&name=Duckhorn%20Sauvignon%20Blanc&user_id=#{@user.id}&wine_id=546e64cf4c6458020000000d").
+        with(
+        headers: {
+          'Accept'=>'*/*',
+          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Content-Length'=>'0',
+          'User-Agent'=>'Faraday v1.3.0'
+          }).
+          to_return(status: 500, body: "", headers: {})
+
+      visit "/wines/546e64cf4c6458020000000d"
+
+      click_button("Add Wine to Favorite List")
+      expect(page).to have_current_path(wine_path("546e64cf4c6458020000000d"))
+      expect(page).to have_content("We're sorry, there was an issue with your request")
     end
   end
 end

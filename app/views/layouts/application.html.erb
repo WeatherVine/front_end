@@ -12,7 +12,7 @@
   <body>
     <div class="container">
       <% flash.each do |name, message| %>
-      <%= content_tag :div, message, class: name %>
+        <%= content_tag :div, message, class: "#{name} flash-message" %>
       <% end%>
     </div>
     <%= yield %>

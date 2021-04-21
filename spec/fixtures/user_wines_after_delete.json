@@ -1,0 +1,22 @@
+{
+ "data": [
+   {
+     "id": 1,
+     "type": "favorite-wine",
+     "attributes": {
+       "api_id": "1234",
+       "name": "Duckhorn Merlot",
+       "comment": "Totes the best."
+     }
+   },
+   {
+     "id": 2,
+     "type": "favorite-wine",
+     "attributes": {
+       "api_id": "2345",
+       "name": "Barefoot Cabernet Sauvignon",
+       "comment": "It’s a'ight."
+     }
+   }
+ ]
+}

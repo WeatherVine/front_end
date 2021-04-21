@@ -1,5 +1,7 @@
 require 'webmock/rspec'
 require 'simplecov'
+require 'webmock/rspec'
+
 SimpleCov.start 'rails'
 SimpleCov.add_filter ['spec', 'config', 'app/channels', 'app/jobs', 'app/mailers']
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration

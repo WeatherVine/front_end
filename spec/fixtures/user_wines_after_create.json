@@ -1,0 +1,40 @@
+{
+ "data": [
+   {
+     "id": 1,
+     "type": "favorite-wine",
+     "attributes": {
+       "api_id": "1234",
+       "name": "Duckhorn Merlot",
+       "comment": "Totes the best."
+     }
+   },
+   {
+     "id": 2,
+     "type": "favorite-wine",
+     "attributes": {
+       "api_id": "2345",
+       "name": "Barefoot Cabernet Sauvignon",
+       "comment": "It’s a'ight."
+     }
+   },
+   {
+     "id": 3,
+     "type": "favorite-wine",
+     "attributes": {
+       "api_id": "3456",
+       "name": "Yellow Tail Pinot Noir",
+       "comment": "OMG"
+     }
+   },
+   {
+     "id": 4,
+     "type": "favorite-wine",
+     "attributes": {
+       "api_id": "546e64cf4c6458020000000d",
+       "name": "Duckhorn Sauvignon Blanc",
+       "comment": "Rose all day"
+     }
+   }
+ ]
+}

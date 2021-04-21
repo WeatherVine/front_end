@@ -48,10 +48,15 @@ RSpec.describe 'Search Results Page', type: :feature do
     end
   end
 
-  # describe 'sad path' do
-  #   it 'enforces coexistence of query params' do
-  #   end
-  # end
+  describe 'sad path' do
+    it 'redirects back to discover page w/ a flash message if any param is missing' do
+      visit wines_search_path(vintage: '2018', location: '')
+
+      expect(current_path).to eq(discover_index_path)
+      expect(page).to have_selector('.flash-message')
+      expect(page).to have_content('Please enter both a Location and a Vintage.')
+    end
+  end
 
   def stub_search_request
     full_url = "#{ENV['BACK_END_URL']}/api/v1/wines/search?location=napa&vintage=2018"

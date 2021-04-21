@@ -19,9 +19,5 @@ class UserWinesController < ApplicationController
       flash[:message] = "We're sorry, there was an issue with your request"
       redirect_to "/wines/#{params[:api_id]}"
     end
-    
   end
-
-# {user_wine {wine_id: 1, user_id: 1, comment: “so wasted”}}
-
 end

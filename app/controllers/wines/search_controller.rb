@@ -7,12 +7,15 @@ class Wines::SearchController < ApplicationController
 
   private
 
+  # Disabling this cop because I don't think it's suggestion is very readable
+  # rubocop:disable Style/GuardClause
   def validate_params
     if params[:location].empty? || params[:vintage].empty?
       flash[:error] = 'Please enter both a Location and a Vintage.'
       redirect_to discover_index_path
     end
   end
+  # rubocop:enable Style/GuardClause
 
   def fetch_data(location, vintage)
     OpenStruct.new({

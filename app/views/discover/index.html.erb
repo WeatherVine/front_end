@@ -2,7 +2,7 @@
   <h1 class="page-header">Search For Wines</h1>
 </div>
 
-<%= form_with url: wines_search_path, method: :get, id: 'search-form' do |form| %>
+<%= form_with url: wines_search_path, method: :get, local: true, id: 'search-form' do |form| %>
   <div class='form-group'>
     <%= form.label :vintage, 'Vintage:' %>
     <%= form.text_field :vintage, class: 'form-control' %>

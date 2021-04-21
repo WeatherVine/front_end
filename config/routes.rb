@@ -5,18 +5,19 @@ Rails.application.routes.draw do
   get '/auth/google_oauth2/callback', to: 'sessions#create'
   get '/user/dashboard', to: 'dashboard#show'
 
-  #discover
+  # Discover
   resources :discover, only: [:index]
 
-  #logout
+  # Logout
   get '/logout', to: 'sessions#destroy'
   delete '/logout', to: 'sessions#destroy'
 
-  #wines
+  # Search Results
+  get '/wines/search', to: 'wines/search#show'
+
+  # Wines
   get '/wines/:id', to: 'wines#show', as: 'wine'
 
-  #user wines
+  # User Wines
   resources :user_wines, only: [:create, :destroy]
-  
-  get '/wines/search', to: 'wines/search#show'
 end

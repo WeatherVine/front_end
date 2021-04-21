@@ -94,7 +94,6 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
           to_return(status: 200, body: "#{json_response2}", headers: {})
 
         click_button("Unfavorite Yellow Tail Pinot Noir")
-        save_and_open_page
         expect(page).to have_current_path(user_dashboard_path)
         expect(page).to have_link("Duckhorn Merlot")
         expect(page).to have_link("Barefoot Cabernet Sauvignon")

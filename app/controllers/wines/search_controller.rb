@@ -1,9 +1,18 @@
 class Wines::SearchController < ApplicationController
+  before_action :validate_params, only: :show
+
   def show
     @info = fetch_data(params[:location], params[:vintage])
   end
 
   private
+
+  def validate_params
+    if params[:location].empty? || params[:vintage].empty?
+      flash[:error] = 'Please enter both a Location and a Vintage.'
+      redirect_to discover_index_path
+    end
+  end
 
   def fetch_data(location, vintage)
     OpenStruct.new({

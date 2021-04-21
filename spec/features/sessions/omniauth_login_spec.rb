@@ -37,24 +37,22 @@ RSpec.describe 'Login Sessions Spec', type: :feature do
     it 'can log a user out' do
       stub_omniauth
 
-      
+      visit "/"
+
+      stub_request(:get, %r{\Ahttps://weathervine-be.herokuapp.com/api/v1/users/\d+/dashboard\z}).
+      with(
+        headers: {
+          'Accept'=>'*/*',
+          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'User-Agent'=>'Faraday v1.3.0'
+          }).
+          to_return(status: 200, body: "", headers: {})
+
+      click_button 'Register/Login with Google', match: :first
+      click_button 'Logout'
+      expect(page).to have_current_path(root_path)
+      expect(page).to have_content("You have been logged out")
     end
 
-    # it 'logs a returning user in via google mock' do
-    #   stub_omniauth
-    #   user = create(:omniauth_mock_user)
-    #   user_count = User.count
-    #   expect(user_count).to eq(1)
-    #
-    #   visit root_path
-    #
-    #   click_link 'Log in with Google'
-    #
-    #   user_count = User.count
-    #   expect(user_count).to eq(1)
-    #
-    #   expect(current_path).to eq(dashboard_path)
-    #   expect(page).to have_content("Welcome back, #{user.username}")
-    # end
   end
 end

@@ -138,7 +138,7 @@ RSpec.describe 'Wine Show Page Spec', type: :feature do
 
       single_wine_json_response = File.read('spec/fixtures/wine_show.json')
 
-      stub_request(:get, "https://weathervine-be.herokuapp.com/api/v1/wines/546e64cf4c6458020000000d").
+      stub_request(:get, "#{ENV['BACK_END_URL']}/api/v1/wines/546e64cf4c6458020000000d").
         with(
           headers: {
          'Accept'=>'*/*',
@@ -147,7 +147,7 @@ RSpec.describe 'Wine Show Page Spec', type: :feature do
           }).
         to_return(status: 200, body: "#{single_wine_json_response}", headers: {})
 
-      stub_request(:get, "https://weathervine-be.herokuapp.com/api/v1/users/#{@user.id}/dashboard").
+      stub_request(:get, "#{ENV['BACK_END_URL']}/api/v1/users/#{@user.id}/dashboard").
          with(
            headers: {
        	  'Accept'=>'*/*',
@@ -156,7 +156,7 @@ RSpec.describe 'Wine Show Page Spec', type: :feature do
            }).
          to_return(status: 200, body: "", headers: {})
 
-      stub_request(:post, "https://weathervine-be.herokuapp.com/api/v1/user/#{@user.id}/wines?comment=&name=Duckhorn%20Sauvignon%20Blanc&user_id=#{@user.id}&wine_id=546e64cf4c6458020000000d").
+      stub_request(:post, "#{ENV['BACK_END_URL']}/api/v1/user/#{@user.id}/wines?comment=&name=Duckhorn%20Sauvignon%20Blanc&user_id=#{@user.id}&wine_id=546e64cf4c6458020000000d").
         with(
         headers: {
           'Accept'=>'*/*',

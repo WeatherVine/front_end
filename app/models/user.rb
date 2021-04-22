@@ -5,7 +5,7 @@ class User < ApplicationRecord
   # rubocop:enable Rails/Validation
 
   def self.create_from_omniauth(auth)
-    User.find_or_create_by!(uid: auth['uid'], provider: auth['provider']) do |user|
+    User.find_or_create_by(uid: auth['uid'], provider: auth['provider']) do |user|
       user.username = auth['info']['name']
     end
   end

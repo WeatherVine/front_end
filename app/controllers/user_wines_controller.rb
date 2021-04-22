@@ -1,11 +1,10 @@
 class UserWinesController < ApplicationController
-
   def destroy
-    resp = Faraday.delete("https://weathervine-be.herokuapp.com/api/v1/user/#{current_user.id}/wines/#{params[:id]}") do |req|
+    resp = Faraday.delete("#{ENV['BACK_END_URL']}/api/v1/user/#{current_user.id}/wines/#{params[:id]}") do |req|
       req.params['user_id'] = current_user.id
       req.params['wine_id'] = params[:id]
     end
-    
+
     if resp.status == 200
       redirect_to user_dashboard_path
     else
@@ -15,7 +14,7 @@ class UserWinesController < ApplicationController
   end
 
   def create
-    resp = Faraday.post("https://weathervine-be.herokuapp.com/api/v1/user/#{current_user.id}/wines") do |req|
+    resp = Faraday.post("#{ENV['BACK_END_URL']}/api/v1/user/#{current_user.id}/wines") do |req|
       req.params['comment'] = params[:comment]
       req.params['wine_id'] = params[:api_id]
       req.params['name'] = params[:name]

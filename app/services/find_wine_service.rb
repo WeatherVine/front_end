@@ -1,7 +1,6 @@
 class FindWineService
-
   def self.wines(user_id)
-    response = Faraday.get("https://weathervine-be.herokuapp.com/api/v1/users/#{user_id}/dashboard")
+    response = Faraday.get("#{ENV['BACK_END_URL']}/api/v1/users/#{user_id}/dashboard")
     if response.body == ""
       nil
     else

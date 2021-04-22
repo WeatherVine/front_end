@@ -11,7 +11,7 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
 
       json_response = File.read('spec/fixtures/users_wines.json')
 
-      stub_request(:get, "https://weathervine-be.herokuapp.com/api/v1/users/#{user.id}/dashboard").
+      stub_request(:get, "#{ENV['BACK_END_URL']}/api/v1/users/#{user.id}/dashboard").
         with(
           headers: {
          'Accept'=>'*/*',
@@ -47,7 +47,7 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
 
         json_response_3 = File.read('spec/fixtures/wine_show.json')
 
-        stub_request(:get, "https://weathervine-be.herokuapp.com/api/v1/wines/2345").
+        stub_request(:get, "#{ENV['BACK_END_URL']}/api/v1/wines/2345").
         with(
           headers: {
          'Accept'=>'*/*',
@@ -73,7 +73,7 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
         user2 = create(:user, provider: "dog")
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user2)
         # json_response2 = File.read('spec/fixtures/user_wines_after_delete.json')
-        stub_request(:delete, "https://weathervine-be.herokuapp.com/api/v1/user/#{user2.id}/wines/3456?user_id=#{user2.id}&wine_id=3456").
+        stub_request(:delete, "#{ENV['BACK_END_URL']}/api/v1/user/#{user2.id}/wines/3456?user_id=#{user2.id}&wine_id=3456").
           with(
             headers: {
            'Accept'=>'*/*',
@@ -84,7 +84,7 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
 
         json_response2 = File.read('spec/fixtures/user_wines_after_delete.json')
 
-        stub_request(:get, "https://weathervine-be.herokuapp.com/api/v1/users/#{user2.id}/dashboard").
+        stub_request(:get, "#{ENV['BACK_END_URL']}/api/v1/users/#{user2.id}/dashboard").
           with(
             headers: {
            'Accept'=>'*/*',
@@ -114,7 +114,7 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
 
       json_response = File.read('spec/fixtures/users_wines.json')
 
-      stub_request(:get, "https://weathervine-be.herokuapp.com/api/v1/users/#{@user.id}/dashboard").
+      stub_request(:get, "#{ENV['BACK_END_URL']}/api/v1/users/#{@user.id}/dashboard").
         with(
           headers: {
          'Accept'=>'*/*',
@@ -150,7 +150,7 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
 
       json_response = File.read('spec/fixtures/users_wines.json')
 
-      stub_request(:get, "https://weathervine-be.herokuapp.com/api/v1/users/#{@user.id}/dashboard").
+      stub_request(:get, "#{ENV['BACK_END_URL']}/api/v1/users/#{@user.id}/dashboard").
         with(
           headers: {
          'Accept'=>'*/*',
@@ -159,7 +159,7 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
           }).
         to_return(status: 200, body: "#{json_response}", headers: {})
 
-      stub_request(:delete, "https://weathervine-be.herokuapp.com/api/v1/user/#{@user.id}/wines/3456?user_id=#{@user.id}&wine_id=3456").
+      stub_request(:delete, "#{ENV['BACK_END_URL']}/api/v1/user/#{@user.id}/wines/3456?user_id=#{@user.id}&wine_id=3456").
         with(
           headers: {
          'Accept'=>'*/*',

@@ -170,7 +170,6 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
 
         visit user_dashboard_path
         expect(page).to have_current_path(user_dashboard_path)
-        save_and_open_page
         click_button("Unfavorite Yellow Tail Pinot Noir")
         expect(page).to have_link("Duckhorn Merlot")
         expect(page).to have_link("Barefoot Cabernet Sauvignon")

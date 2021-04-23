@@ -1,17 +1,19 @@
 <section class="nav-bar">
-  <%= button_to "Discover Wines", discover_index_path, method: :get %>
-  <%= button_to "Logout", logout_path, method: :get %>
+  <%= link_to "Discover Wines", discover_index_path, method: :get %>
+  <%= link_to "Logout", logout_path, method: :get %>
 </section>
 
-<h1>Welcome, <%= current_user.username %></h1>
+<div class='bkg-transparent-white'>
+  <h1>Welcome, <%= current_user.username %></h1>
 
-<h3> My Favorite Wines</h3>
-<% if @wines %>
-  <% @wines.each do |show_wine| %>
-  <%= link_to "#{show_wine.name}", "/wines/#{show_wine.api_id}", method: :get %><br>
-  <%= show_wine.comment %><br>
-  <%= button_to "Unfavorite #{show_wine.name}", user_wine_path(show_wine.api_id), method: :delete %>
-  <% end %>
-<% else %>
-  <%= "You don't have any favorite wines yet!" %>
-<% end  %>
+  <h3> My Favorite Wines</h3>
+  <% if @wines %>
+    <% @wines.each do |show_wine| %>
+    <%= link_to "#{show_wine.name}", "/wines/#{show_wine.api_id}", method: :get %><br>
+    <%= show_wine.comment %><br>
+    <%= button_to "Unfavorite #{show_wine.name}", user_wine_path(show_wine.api_id), method: :delete %>
+    <% end %>
+  <% else %>
+    <%= "You don't have any favorite wines yet!" %>
+  <% end  %>
+</div>

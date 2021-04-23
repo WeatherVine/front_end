@@ -1,6 +1,6 @@
 class UserWinesController < ApplicationController
   def destroy
-    resp = Faraday.delete("#{ENV['BACK_END_URL']}/api/v1/user/#{current_user.id}/wines/#{params[:id]}") do |req|
+    resp = Faraday.delete("#{ENV['BACK_END_URL']}/api/v1/users/#{current_user.id}/wines/#{params[:id]}") do |req|
       req.params['user_id'] = current_user.id
       req.params['wine_id'] = params[:id]
     end
@@ -14,7 +14,7 @@ class UserWinesController < ApplicationController
   end
 
   def create
-    resp = Faraday.post("#{ENV['BACK_END_URL']}/api/v1/user/#{current_user.id}/wines") do |req|
+    resp = Faraday.post("#{ENV['BACK_END_URL']}/api/v1/users/#{current_user.id}/wines") do |req|
       req.params['comment'] = params[:comment]
       req.params['wine_id'] = params[:api_id]
       req.params['name'] = params[:name]

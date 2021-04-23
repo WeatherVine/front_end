@@ -55,7 +55,7 @@ class Wines::SearchController < ApplicationController
       name: search_result[:name],
       api_id: search_result[:api_id],
       vintage: search_result[:vintage],
-      location: search_result[:location]
+      location: search_result[:area]
     })
   end
 end

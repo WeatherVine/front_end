@@ -12,7 +12,7 @@ RSpec.describe 'Login Sessions Spec', type: :feature do
 
       visit "/"
 
-      stub_request(:get, %r{\Ahttps://weathervine-be.herokuapp.com/api/v1/users/\d+/dashboard\z}).
+      stub_request(:get, %r{\A#{ENV['BACK_END_URL']}/api/v1/users/\d+/dashboard\z}).
       with(
         headers: {
           'Accept'=>'*/*',
@@ -39,7 +39,7 @@ RSpec.describe 'Login Sessions Spec', type: :feature do
 
       visit "/"
 
-      stub_request(:get, %r{\Ahttps://weathervine-be.herokuapp.com/api/v1/users/\d+/dashboard\z}).
+      stub_request(:get, %r{\A#{ENV['BACK_END_URL']}/api/v1/users/\d+/dashboard\z}).
       with(
         headers: {
           'Accept'=>'*/*',

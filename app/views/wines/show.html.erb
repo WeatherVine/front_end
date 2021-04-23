@@ -4,9 +4,11 @@
   <%= button_to "Logout", logout_path, method: :get %>
 </section>
 
-<h3><%= @wine[0].name %> <%= @wine[0].vintage %>, <%= @wine[0].area %></h3>
+<h3><%= "#{@wine[0].name} #{@wine[0].vintage}, #{@wine[0].area}" %></h3>
 
-<h4> Climate Data Summary For Growing Season</h4>
+<h4> Climate Data Summary For Year Before Wine's Vintage</h4>
+<li> Start Date: <%= @wine[0].start_date %></li>
+<li> End Date: <%= @wine[0].end_date %></li>
 <li> Average Temp (F): <%= @wine[0].temp %> degrees </li>
 <li> Total Precipitation: <%= @wine[0].precip %> inches</li>
 

@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:3001/api/v1/wines/search?location=napa&vintage=2018
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.3.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"dee454da8ec7e78222bbfb0799959ae0"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - fb7e651c-65f7-4f53-ba79-8fdf6da6f813
+      X-Runtime:
+      - '8.606292'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJkYXRhIjpbeyJpZCI6IjVlZWFjYzVhMWVkOWY0M2YwZGIzYTgwMyIsInR5cGUiOiJ3aW5lX3NlYXJjaF9yZXN1bHQiLCJhdHRyaWJ1dGVzIjp7ImFwaV9pZCI6IjVlZWFjYzVhMWVkOWY0M2YwZGIzYTgwMyIsIm5hbWUiOiJCcmVhZCBcdTAwMjYgQnV0dGVyIFJvc8OpIDIwMTgiLCJ2aW50YWdlIjoiMjAxOCIsImFyZWEiOiJOYXBhIFZhbGxleSJ9fSx7ImlkIjoiNWY5MTljNGJjOGFiYjMwZGQ2M2I5Y2QxIiwidHlwZSI6IndpbmVfc2VhcmNoX3Jlc3VsdCIsImF0dHJpYnV0ZXMiOnsiYXBpX2lkIjoiNWY5MTljNGJjOGFiYjMwZGQ2M2I5Y2QxIiwibmFtZSI6IlZlbmdlIFZpbmV5YXJkcyBTaWxlbmNpZXV4IENhYmVybmV0IFNhdXZpZ25vbiAyMDE4IiwidmludGFnZSI6IjIwMTgiLCJhcmVhIjoiTmFwYSBWYWxsZXkifX0seyJpZCI6IjVmM2ZkOTAzYzVkN2JkMjljMmU3MTg0MiIsInR5cGUiOiJ3aW5lX3NlYXJjaF9yZXN1bHQiLCJhdHRyaWJ1dGVzIjp7ImFwaV9pZCI6IjVmM2ZkOTAzYzVkN2JkMjljMmU3MTg0MiIsIm5hbWUiOiIxODgxIE5hcGEgQ2FiZXJuZXQgU2F1dmlnbm9uIDIwMTgiLCJ2aW50YWdlIjoiMjAxOCIsImFyZWEiOiJOYXBhIFZhbGxleSJ9fSx7ImlkIjoiNWYwNjVmYjVmYmZkNmUxN2FjYWFkMTZiIiwidHlwZSI6IndpbmVfc2VhcmNoX3Jlc3VsdCIsImF0dHJpYnV0ZXMiOnsiYXBpX2lkIjoiNWYwNjVmYjVmYmZkNmUxN2FjYWFkMTZiIiwibmFtZSI6IkNsaWZmIExlZGUgU2F1dmlnbm9uIEJsYW5jIDIwMTgiLCJ2aW50YWdlIjoiMjAxOCIsImFyZWEiOiJOYXBhIFZhbGxleSJ9fSx7ImlkIjoiNWUzMmZhYzJhMGQ1YTM1NjY1NmE2ZTk5IiwidHlwZSI6IndpbmVfc2VhcmNoX3Jlc3VsdCIsImF0dHJpYnV0ZXMiOnsiYXBpX2lkIjoiNWUzMmZhYzJhMGQ1YTM1NjY1NmE2ZTk5IiwibmFtZSI6IkNoYXJsZXMgS3J1ZyBTYXV2aWdub24gQmxhbmMiLCJ2aW50YWdlIjoiMjAxOCIsImFyZWEiOiJOYXBhIFZhbGxleSJ9fV19
+  recorded_at: Fri, 23 Apr 2021 02:22:14 GMT
+recorded_with: VCR 6.0.0

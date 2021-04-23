@@ -68,12 +68,15 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
       end
 
       it "removes a wine from the favorite wines list when a user clicks the `unfavorite button`" do
+        VCR.turn_off!
+
         stub_omniauth
 
         user2 = create(:user, provider: "dog")
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user2)
         # json_response2 = File.read('spec/fixtures/user_wines_after_delete.json')
-        stub_request(:delete, "#{ENV['BACK_END_URL']}/api/v1/user/#{user2.id}/wines/3456?user_id=#{user2.id}&wine_id=3456").
+        # "http://localhost:3001
+        stub_request(:delete, "#{ENV['BACK_END_URL']}/api/v1/users/#{user2.id}/wines/3456?user_id=#{user2.id}&wine_id=3456").
           with(
             headers: {
            'Accept'=>'*/*',
@@ -98,7 +101,7 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
         expect(page).to have_link("Duckhorn Merlot")
         expect(page).to have_link("Barefoot Cabernet Sauvignon")
         expect(page).to_not have_link("Yellow Tail Pinot Noir")
-
+        VCR.turn_on!
       end
     end
   end
@@ -144,6 +147,7 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
 
   describe "delete user wine sad path" do
     it "alerts the user if a status other than 200 is returned with trying to remove a favorite wine" do
+      VCR.turn_off!
       stub_omniauth
       @user = create(:user)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
@@ -159,7 +163,7 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
           }).
         to_return(status: 200, body: "#{json_response}", headers: {})
 
-      stub_request(:delete, "#{ENV['BACK_END_URL']}/api/v1/user/#{@user.id}/wines/3456?user_id=#{@user.id}&wine_id=3456").
+      stub_request(:delete, "#{ENV['BACK_END_URL']}/api/v1/users/#{@user.id}/wines/3456?user_id=#{@user.id}&wine_id=3456").
         with(
           headers: {
          'Accept'=>'*/*',
@@ -175,6 +179,8 @@ RSpec.describe 'User Dashboard Spec', type: :feature do
         expect(page).to have_link("Barefoot Cabernet Sauvignon")
         expect(page).to have_link("Yellow Tail Pinot Noir")
         expect(page).to have_content("We're sorry, there was an issue with your request")
+
+      VCR.turn_on!
     end
   end
 end

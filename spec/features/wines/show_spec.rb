@@ -67,6 +67,8 @@ RSpec.describe 'Wine Show Page Spec', type: :feature do
     end
 
     it "adds wine to favorite list" do
+      VCR.turn_off!
+
       @user = create(:user, id: 111)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
@@ -93,7 +95,7 @@ RSpec.describe 'Wine Show Page Spec', type: :feature do
         to_return(status: 200, body: "#{single_wine_json_response}", headers: {})
 
       # Request to add to a user's favorite wines
-      stub_request(:post, "#{ENV['BACK_END_URL']}/api/v1/user/#{@user.id}/wines?comment=&name=Duckhorn%20Sauvignon%20Blanc&user_id=#{@user.id}&wine_id=546e64cf4c6458020000000d").
+      stub_request(:post, "#{ENV['BACK_END_URL']}/api/v1/users/#{@user.id}/wines?comment=&name=Duckhorn%20Sauvignon%20Blanc&user_id=#{@user.id}&wine_id=546e64cf4c6458020000000d").
         with(
         headers: {
           'Accept'=>'*/*',
@@ -127,11 +129,14 @@ RSpec.describe 'Wine Show Page Spec', type: :feature do
       expect("Barefoot Cabernet Sauvignon").to appear_before("It’s a'ight.")
       expect("Yellow Tail Pinot Noir").to appear_before("OMG")
       expect("Duckhorn Sauvignon Blanc").to appear_before("Rose all day")
+
+      VCR.turn_on!
     end
   end
 
   describe 'sad path' do
     it "gives a flash error if response is a 500" do
+      VCR.turn_off!
 
       @user = create(:user)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
@@ -156,7 +161,7 @@ RSpec.describe 'Wine Show Page Spec', type: :feature do
            }).
          to_return(status: 200, body: "", headers: {})
 
-      stub_request(:post, "#{ENV['BACK_END_URL']}/api/v1/user/#{@user.id}/wines?comment=&name=Duckhorn%20Sauvignon%20Blanc&user_id=#{@user.id}&wine_id=546e64cf4c6458020000000d").
+      stub_request(:post, "#{ENV['BACK_END_URL']}/api/v1/users/#{@user.id}/wines?comment=&name=Duckhorn%20Sauvignon%20Blanc&user_id=#{@user.id}&wine_id=546e64cf4c6458020000000d").
         with(
         headers: {
           'Accept'=>'*/*',
@@ -171,6 +176,7 @@ RSpec.describe 'Wine Show Page Spec', type: :feature do
       click_button("Add Wine to Favorite List")
       expect(page).to have_current_path(wine_path("546e64cf4c6458020000000d"))
       expect(page).to have_content("We're sorry, there was an issue with your request")
+      VCR.turn_on!
     end
   end
 end
